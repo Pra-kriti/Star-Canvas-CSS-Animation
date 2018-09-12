@@ -1,0 +1,72 @@
+/* CSS Animation for Counterclockwise rotation on clicking Rotate Left button */
+.counterclockwise {
+    /* -webkit-animation : animation-name animation-duration animation-timing-function animation-iteration-count
+
+        animation-name : declares the name of the @keyframes at-rule to manipulate
+        animation-duration : the length of time it takes for an animation to complete one cycle
+        animation-timing-function : establishes preset acceleration curves such as ease or linear
+        animation-iteration-count : the number of times the animation should be performed */
+
+    -webkit-animation:cspin 2s linear 5;
+    -moz-animation:cspin 2s linear 5;
+    animation:cspin 2s linear 5;
+}
+
+/* @keyframes at-rule defines what should happen at specific moments during the animation
+    0% is the beginning of the animation and 100% is the end */
+@-webkit-keyframes cspin {
+    0% {
+        /* Negative value indicates rotation in counterclockwise direction */
+        -webkit-transform: rotate(-0deg);
+    }
+    
+    /* Widened the gap between rotation degrees for greater acceleration at beginning and narrow the gap with the end of animation
+    i.e. Differences in angle = 180,90,45 degree respectively */
+    
+    25% {
+        -webkit-transform: rotate(-180deg);
+    }
+    
+    50% {
+        -webkit-transform: rotate(-270deg);
+    }
+    
+    75% {
+        -webkit-transform: rotate(-315deg);
+    }
+    
+    100% {
+         -webkit-transform: rotate(-360deg);
+    }    
+}
+
+
+/* CSS Animation for Clockwise rotation on clicking Rotate Right button  */
+.clockwise {
+    -webkit-animation:spin 2s linear 5;
+    -moz-animation:spin 2s linear 5;
+    animation:spin 2s linear 5;
+}
+@-webkit-keyframes spin {
+    0% {
+        /* Positive value indicates rotation in clockwise direction */
+        -webkit-transform: rotate(0deg);
+    }  
+    
+    25% {
+        -webkit-transform: rotate(180deg);
+    }
+    
+    50% {
+        -webkit-transform: rotate(270deg);
+    }
+    
+    75% {
+        -webkit-transform: rotate(315deg);
+    }
+    
+    100% {
+         -webkit-transform: rotate(360deg);
+    }    
+}
+            

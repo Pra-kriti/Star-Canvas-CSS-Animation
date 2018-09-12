@@ -1,0 +1,92 @@
+<!-- Star Shape using HTML5 Canvas with yellow background color
+
+     RotateLeft Button : Rotate Star Shape in anticlockwise direction for 10s
+     RotateRight Button : Rotate Star Shape in clockwise direction for 10s
+
+     Rotation is such that the rotation speed slowly accelerates in the beginning 
+     as well as slowly stops in the end
+     
+     Rotation animation using CSS
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+
+        <script>
+            // To draw Star Shape using HTML5 Canvas
+            $(function(){
+
+                var canvas=document.getElementById("canvas");
+                var ctx=canvas.getContext("2d");
+                ctx.save();
+                
+
+                // A star is basically a regular polygon with alternating points on an inner and outer radius
+                // Set the position, number of points (spikes), inner and outer radius of the spikes
+                
+                function drawStar(cx,cy,points,outerRadius,innerRadius){
+                    var rot=Math.PI/2*3;
+                    var x=cx;
+                    var y=cy;
+                    var step=Math.PI/points;
+                    
+                    // beginPath() : Begins a path, or resets the current path
+                    ctx.beginPath();
+                    // moveTo() : Moves the path to the specified point in the canvas, without creating a line
+                    ctx.moveTo(cx,cy-outerRadius)
+                    for(i=0;i<points;i++){
+                        x=cx+Math.cos(rot)*outerRadius;
+                        y=cy+Math.sin(rot)*outerRadius;
+                        // lineTo() : Adds a new point and creates a line to that point from the last specified point in the canvas
+                        ctx.lineTo(x,y)
+                        rot+=step
+
+                        x=cx+Math.cos(rot)*innerRadius;
+                        y=cy+Math.sin(rot)*innerRadius;
+                        ctx.lineTo(x,y)
+                        rot+=step
+                    }
+                    ctx.lineTo(cx,cy-outerRadius);
+
+                    // closePath() : Creates a path from the current point back to the starting point
+                    ctx.closePath();
+                    ctx.fillStyle='yellow';
+                    ctx.fill();
+                    ctx.restore();
+                }  
+
+                drawStar(100,100,5,90,30);
+
+            }); 
+
+            // function invoked when Rotate Left button is clicked
+            function rotateLeft(){
+                // add class to the id: "canvas" for counterclockwise rotation to use different CSS for animation
+                var canvas = document.getElementById('canvas');
+                canvas.className = 'counterclockwise';
+                // resets the animation 
+                canvas.style.animation = 'none';
+                canvas.offsetParent;
+                canvas.style.animation = null;
+            }
+
+            // function invoked when Rotate Right button is clicked
+            function rotateRight(){
+                // same as counterclockwise rotation 
+                var canvas = document.getElementById('canvas');
+                canvas.className = 'clockwise';
+                canvas.style.animation = 'none';
+                canvas.offsetParent;
+                canvas.style.animation = null;
+            }
+        </script>
+    </head>
+
+    <body>
+        <canvas id="canvas" width=250 height=250></canvas><br>
+        <button onclick="rotateLeft()">Rotate Left</button>
+        <button onclick="rotateRight()" style="margin-left:5.75em;">Rotate Right</button>
+    </body>
+</html>
